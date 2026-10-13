@@ -13,6 +13,7 @@ namespace api_raceday_part2.Data
         //TODO: add a DbSet<T> property here for each model,
         //once the model classes in /models have real properties.
         //e.g public DbSet<User> Users { get; set;}
+        public DbSet<api_raceday_part2.models.Event> Events { get; set; }
 
     }//end of ApplicationDBContext class
 

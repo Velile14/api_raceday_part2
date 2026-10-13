@@ -14,7 +14,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApplicationDBContext>(options =>
 {
     options.UseSqlServer(
-        builder.Configuration.GetConnectionString("Server=(localdb)\\api_raceday;Trusted_Connection=True;MultipleActiveResultSets=true"));
+        builder.Configuration.GetConnectionString("DefaultConnection"));
 }
     );
 

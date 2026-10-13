@@ -6,9 +6,9 @@ namespace api_raceday_part2.Controllers
 
     [Route("api/[controller]")]
     [ApiController]
-    public class events_controller : ControllerBase
-    {//start of the events_controller class
+    public class EventsController : ControllerBase
+    {//start of the EventsController class
 
-    }//end of the events_controller class
+    }//end of the EventsController class
 
 }//end of namespace

@@ -20,6 +20,16 @@ namespace api_raceday_part2.Controllers
 
         //actions go here, e.g. Get, Post, Put, Delete
 
+        // GET: api/Events
+        [HttpGet]
+        public IActionResult GetEvents()
+        {//start of method
+
+            var events = _context.Events.ToList();
+            return Ok(events);
+
+        }//end of method
+
     }//end of the EventsController class
 
 }//end of namespace

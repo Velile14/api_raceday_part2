@@ -4,7 +4,7 @@
     public class Event
     {//start of Event class
 
-        //Event class properties 
+        //event class properties 
         public int EventID { get; set; }    
         public string EventName { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;

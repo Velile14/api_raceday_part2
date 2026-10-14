@@ -30,6 +30,16 @@ namespace api_raceday_part2.Controllers
 
         }//end of method
 
+        // POST: api/Events
+        [HttpPost]
+        public IActionResult CreateEvent([FromBody] models.Event newEvent)
+        {
+            _context.Events.Add(newEvent);
+            _context.SaveChanges();
+            return Ok(newEvent);
+            
+        }//end of method
+
     }//end of the EventsController class
 
 }//end of namespace

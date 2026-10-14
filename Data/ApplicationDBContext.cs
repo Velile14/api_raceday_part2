@@ -28,6 +28,8 @@ namespace api_raceday_part2.Data
 
         }//end of method
 
+        public DbSet<api_raceday_part2.models.User> Users { get; set; }
+
     }//end of ApplicationDBContext class
 
 }//end of namespace

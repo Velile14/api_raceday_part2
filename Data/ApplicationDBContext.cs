@@ -16,6 +16,10 @@ namespace api_raceday_part2.Data
         //e.g public DbSet<User> Users { get; set;}
         public DbSet<api_raceday_part2.models.Event> Events { get; set; }
 
+        public DbSet<api_raceday_part2.models.User> Users { get; set; }
+
+        public DbSet<api_raceday_part2.models.Role> Roles { get; set; }
+
         //configure entity properties
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {//start of method
@@ -26,9 +30,12 @@ namespace api_raceday_part2.Data
                 .Property(e => e.Distance)
                 .HasPrecision(6, 2);
 
-        }//end of method
+            modelBuilder.Entity<api_raceday_part2.models.User>()
+                .HasOne(u => u.Role)
+                .WithMany(r => r.Users)
+                .HasForeignKey(u => u.RoleID);
 
-        public DbSet<api_raceday_part2.models.User> Users { get; set; }
+        }//end of method
 
     }//end of ApplicationDBContext class
 

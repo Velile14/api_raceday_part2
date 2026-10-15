@@ -12,6 +12,9 @@
         public string Password { get; set; } = string.Empty; //note: never return a user's password or stored password hash in an API response
         public int RoleID { get; set; } // Foreign key to Role
 
+        //navigation property
+        public Role Role { get; set; } = new Role();
+
     }//end of User class
 
 }//end of namespace

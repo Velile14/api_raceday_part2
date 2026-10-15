@@ -60,6 +60,23 @@ namespace api_raceday_part2.Migrations
                     b.ToTable("Events");
                 });
 
+            modelBuilder.Entity("api_raceday_part2.models.Role", b =>
+                {
+                    b.Property<int>("RoleID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoleID"));
+
+                    b.Property<string>("RoleName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("RoleID");
+
+                    b.ToTable("Roles");
+                });
+
             modelBuilder.Entity("api_raceday_part2.models.User", b =>
                 {
                     b.Property<int>("UserID")
@@ -89,7 +106,25 @@ namespace api_raceday_part2.Migrations
 
                     b.HasKey("UserID");
 
+                    b.HasIndex("RoleID");
+
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("api_raceday_part2.models.User", b =>
+                {
+                    b.HasOne("api_raceday_part2.models.Role", "Role")
+                        .WithMany("Users")
+                        .HasForeignKey("RoleID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
+                });
+
+            modelBuilder.Entity("api_raceday_part2.models.Role", b =>
+                {
+                    b.Navigation("Users");
                 });
 #pragma warning restore 612, 618
         }

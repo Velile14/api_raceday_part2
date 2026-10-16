@@ -12,7 +12,9 @@
         public string Location { get; set; } = string.Empty;
         public decimal Distance { get; set; }
         public int EventTypeID { get; set; } // Foreign key to EventType
+        public EventType EventType { get; set; } = null!;
         public int UserID { get; set; } // Foreign key to User
+        public int OrganizerID { get; set; } // Foreign key to Organizer
 
     }//end of Event class
 

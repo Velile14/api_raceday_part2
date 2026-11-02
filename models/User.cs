@@ -13,7 +13,7 @@
         public int RoleID { get; set; } // Foreign key to Role
 
         //navigation property
-        public Role Role { get; set; } = new Role();
+        public Role Role { get; set; } = null!;
 
     }//end of User class
 

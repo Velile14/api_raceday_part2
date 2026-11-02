@@ -71,7 +71,8 @@ namespace api_raceday_part2.Controllers
                 LastName = dto.LastName.Trim(),
                 Email = email,
                 Password = BCrypt.Net.BCrypt.HashPassword(dto.Password),
-                RoleID = participantRole.RoleID
+                RoleID = participantRole.RoleID,
+                Role = participantRole
 
             };//end of user object initialization
 

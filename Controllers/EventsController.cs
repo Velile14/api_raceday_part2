@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
+using api_raceday_part2.Data;
+using api_raceday_part2.models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
@@ -11,9 +13,9 @@ namespace api_raceday_part2.Controllers
     public class EventsController : ControllerBase
     {//start of the EventsController class
 
-        private readonly Data.ApplicationDBContext _context;
+        private readonly ApplicationDBContext _context;
 
-        public EventsController(Data.ApplicationDBContext context)
+        public EventsController(ApplicationDBContext context)
         {//start of constructor
 
             _context = context;
@@ -35,7 +37,7 @@ namespace api_raceday_part2.Controllers
         // POST: api/Events
         [Authorize(Roles = "Organiser")]
         [HttpPost]
-        public IActionResult CreateEvent([FromBody] models.Event newEvent)
+        public IActionResult CreateEvent([FromBody] Event newEvent)
         {
             // Get the ID of the logged-in user
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);

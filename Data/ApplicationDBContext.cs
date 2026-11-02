@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using api_raceday_part2.models;
 
 namespace api_raceday_part2.Data
 {//start of namespace
@@ -14,22 +15,21 @@ namespace api_raceday_part2.Data
         //TODO: add a DbSet<T> property here for each model,
         //once the model classes in /models have real properties.
         //e.g public DbSet<User> Users { get; set;}
-        public DbSet<api_raceday_part2.models.Event> Events { get; set; }
+        public DbSet<Event> Events { get; set; }
 
-        public DbSet<api_raceday_part2.models.User> Users { get; set; }
+        public DbSet<User> Users { get; set; }
 
-        public DbSet<api_raceday_part2.models.Role> Roles { get; set; }
-
-        public DbSet<api_raceday_part2.models.Category> Categories
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<Category> Categories
         { get; set; }
 
-        public DbSet<api_raceday_part2.models.Enrolment> Enrolments
+        public DbSet<Enrolment> Enrolments
         { get; set; }
 
-        public DbSet<api_raceday_part2.models.Result> Results
+        public DbSet<Result> Results
         { get; set; }
 
-        public DbSet<api_raceday_part2.models.EventType> EventTypes
+        public DbSet<EventType> EventTypes
         { get; set; }
 
         //configure entity properties

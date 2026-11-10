@@ -144,5 +144,49 @@ namespace RaceDay.Web.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        // Organiser: view enrolments across all owned events.
+        public async Task<IActionResult> Manage()
+        {
+            if (HttpContext.Session.GetString("Role") != "Organiser")
+                return RedirectToAction("Login", "Auth");
+
+            if (!int.TryParse(
+                HttpContext.Session.GetString("UserID"),
+                out int userId))
+            {
+                return RedirectToAction("Login", "Auth");
+            }
+
+            try
+            {
+                var events = await _apiService
+                    .GetAsync<List<EventViewModel>>("api/Events");
+
+                var organiserEvents = (events ?? new List<EventViewModel>())
+                    .Where(e => e.OrganizerID == userId)
+                    .ToList();
+
+                var allEnrolments = new List<EnrolmentViewModel>();
+
+                foreach (var raceEvent in organiserEvents)
+                {
+                    var enrolments = await _apiService
+                        .GetAsync<List<EnrolmentViewModel>>(
+                            $"api/Enrolments/event/{raceEvent.EventID}");
+
+                    if (enrolments != null)
+                        allEnrolments.AddRange(enrolments);
+                }
+
+                return View(allEnrolments);
+            }
+            catch (HttpRequestException ex)
+            {
+                ViewBag.ErrorMessage = ex.Message;
+                return View(new List<EnrolmentViewModel>());
+            }
+        }
+
     }
 }

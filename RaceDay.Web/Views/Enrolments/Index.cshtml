@@ -1,1 +1,59 @@
-﻿
+﻿@model List<RaceDay.Web.ViewModels.EnrolmentViewModel>
+
+@{
+    ViewData["Title"] = "My Enrolments";
+}
+
+<h2>My Enrolments</h2>
+
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-danger">@ViewBag.ErrorMessage</div>
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}
+
+@if (Model == null || !Model.Any())
+{
+    <p>You have not entered any events yet.</p>
+    <a asp-controller="Events" asp-action="Index"
+       class="btn btn-primary">Browse Events</a>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Event</th>
+                <th>Category</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var enrolment in Model)
+            {
+                <tr>
+                    <td>@(enrolment.Event?.EventName ?? "Event unavailable")</td>
+                    <td>@(enrolment.Category?.CategoryName ?? "Category unavailable")</td>
+                    <td>
+                        <form asp-action="Delete" method="post">
+                            <input type="hidden" name="id"
+                                   value="@enrolment.EnrolmentID" />
+                            <button type="submit" class="btn btn-danger btn-sm">
+                                Cancel
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

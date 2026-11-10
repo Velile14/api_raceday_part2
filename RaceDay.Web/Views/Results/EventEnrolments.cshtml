@@ -1,5 +1,91 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model List<RaceDay.Web.ViewModels.EnrolmentViewModel>
+
 @{
+    ViewData["Title"] = "Event Participants";
 }
+
+<div class="container mt-4">
+    <h2>Event Participants</h2>
+
+    <p>Event ID: @ViewBag.EventID</p>
+
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div class="alert alert-danger">@ViewBag.ErrorMessage</div>
+    }
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+    }
+
+    @if (Model == null || !Model.Any())
+    {
+        <div class="alert alert-info">
+            No participants have enrolled in this event yet.
+        </div>
+    }
+    else
+    {
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Enrolment ID</th>
+                    <th>Category</th>
+                    <th>Finish Position</th>
+                    <th>Finish Time</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var enrolment in Model)
+                {
+                    <tr>
+                        <form asp-action="Capture" method="post">
+                            @Html.AntiForgeryToken()
+
+                            <input type="hidden" name="EventID"
+                                   value="@ViewBag.EventID" />
+
+                            <input type="hidden" name="EnrolmentID"
+                                   value="@enrolment.EnrolmentID" />
+
+                        <td>@enrolment.EnrolmentID</td>
+
+                        <td>
+                            @(enrolment.Category?.CategoryName ?? "Unavailable")
+                        </td>
+
+                        <td>
+                            <input type="number" name="FinishPosition"
+                                   min="1" required class="form-control"
+                                   style="width:100px" />
+                        </td>
+
+                        <td>
+                            <input type="text" name="FinishTime"
+                                   placeholder="00:35:20" required
+                                   class="form-control"
+                                   style="width:130px" />
+                        </td>
+
+                        <td>
+                            <button type="submit" class="btn btn-primary btn-sm">
+                                Save Result
+                            </button>
+                        </td>
+                        </form>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+    <a asp-controller="Events" asp-action="Index"
+       class="btn btn-secondary">Back to Events</a>
+</div>

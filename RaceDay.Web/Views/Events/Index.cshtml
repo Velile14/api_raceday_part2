@@ -89,6 +89,15 @@
                                 </a>
                             }
 
+                            @if (Context.Session.GetString("Role") == "Organiser")
+                            {
+                                <a asp-controller="Enrolments"
+                                   asp-action="Manage"
+                                   class="btn btn-primary mb-3">
+                                    View All Enrolments
+                                </a>
+                            }
+
                         </div>
 
                     </div>

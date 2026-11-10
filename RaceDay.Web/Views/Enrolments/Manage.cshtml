@@ -1,0 +1,70 @@
+﻿@model List<RaceDay.Web.ViewModels.EnrolmentViewModel>
+
+@{
+    ViewData["Title"] = "Manage Enrolments";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Manage Event Enrolments</h2>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["SuccessMessage"]
+        </div>
+    }
+
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div class="alert alert-danger">
+            @ViewBag.ErrorMessage
+        </div>
+    }
+
+    @if (Model == null || !Model.Any())
+    {
+        <div class="alert alert-info">
+            There are currently no enrolments for your events.
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Participant</th>
+                        <th>Event</th>
+                        <th>Category</th>
+                        <th>Enrolment ID</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var enrolment in Model)
+                    {
+                        <tr>
+                            <td>
+                                @(enrolment.UserID)
+                            </td>
+                            <td>
+                                @(enrolment.Event?.EventName ?? "N/A")
+                            </td>
+                            <td>
+                                @(enrolment.Category?.CategoryName ?? "N/A")
+                            </td>
+                            <td>
+                                @enrolment.EnrolmentID
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+
+    <a asp-controller="Events"
+       asp-action="Index"
+       class="btn btn-secondary mt-3">
+        Back to Events
+    </a>
+</div>

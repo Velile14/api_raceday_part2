@@ -1,5 +1,4 @@
-﻿
-using api_raceday_part2.Data;
+﻿using api_raceday_part2.Data;
 using api_raceday_part2.models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

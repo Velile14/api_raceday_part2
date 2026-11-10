@@ -1,1 +1,45 @@
-﻿
+﻿@model RaceDay.Web.ViewModels.CreateEnrolmentViewModel
+
+@{
+    ViewData["Title"] = "Enter Event";
+}
+
+<h2>Enter Event</h2>
+
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-danger">@ViewBag.ErrorMessage</div>
+}
+
+@if (Model.Categories.Any())
+{
+    <form asp-action="Create" method="post">
+        @Html.AntiForgeryToken()
+
+        <input type="hidden" asp-for="EventID" />
+
+        <div class="mb-3">
+            <label asp-for="CategoryID" class="form-label">
+                Select Category
+            </label>
+
+            <select asp-for="CategoryID" class="form-select"
+                    asp-items="@(new SelectList(Model.Categories,
+                                            "CategoryID", "CategoryName"))">
+            <option value="">-- Select a category --</option>
+        </select>
+    </div>
+
+        <button type="submit" class="btn btn-primary">
+            Confirm Enrolment
+        </button>
+
+        <a asp-controller="Events" asp-action="Index"
+           class="btn btn-secondary">Back</a>
+    </form>
+}
+else
+{
+    <a asp-controller="Events" asp-action="Index"
+       class="btn btn-secondary">Back to Events</a>
+}

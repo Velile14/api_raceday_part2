@@ -79,6 +79,16 @@
                                 </a>
                             }
 
+                            @if (Context.Session.GetString("Role") == "Organiser")
+                            {
+                                <a asp-controller="Results"
+                                   asp-action="EventEnrolments"
+                                   asp-route-eventId="@item.EventID"
+                                   class="btn btn-primary w-100 mt-2">
+                                    Manage Participants & Results
+                                </a>
+                            }
+
                         </div>
 
                     </div>

@@ -1,0 +1,196 @@
+﻿@{
+    ViewData["Title"] = "RaceDay Dashboard";
+
+    var userId = Context.Session.GetInt32("UserID");
+    var firstName = Context.Session.GetString("FirstName");
+    var role = Context.Session.GetString("Role");
+
+    var isLoggedIn = userId.HasValue;
+}
+
+<div class="container mt-4">
+
+    @* PARTICIPANT DASHBOARD *@
+    @if (isLoggedIn && role == "Participant")
+    {
+        <div class="p-5 mb-4 rounded-4 shadow"
+             style="background: linear-gradient(120deg, #0d6efd, #084298); color: white;">
+
+            <span class="badge bg-light text-primary mb-3">
+                PARTICIPANT PORTAL
+            </span>
+
+            <h1 class="display-5 fw-bold">
+                Hello, @firstName!
+            </h1>
+
+            <p class="fs-5 mb-0">
+                Your next sporting challenge starts here.
+                Discover events, manage your entries and follow your progress.
+            </p>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="fw-bold text-primary">Your RaceDay Activities</h2>
+            <span class="badge bg-primary fs-6">Participant</span>
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 border-0 shadow-sm border-top border-primary border-4">
+                    <div class="card-body">
+                        <div class="fs-1 mb-3">🏃</div>
+                        <h5 class="fw-bold">Browse Events</h5>
+                        <p class="text-muted">
+                            Explore upcoming sporting events and find your next challenge.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 border-0 shadow-sm border-top border-primary border-4">
+                    <div class="card-body">
+                        <div class="fs-1 mb-3">📝</div>
+                        <h5 class="fw-bold">My Enrolments</h5>
+                        <p class="text-muted">
+                            View and manage the events you have entered.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 border-0 shadow-sm border-top border-primary border-4">
+                    <div class="card-body">
+                        <div class="fs-1 mb-3">🏆</div>
+                        <h5 class="fw-bold">My Results</h5>
+                        <p class="text-muted">
+                            Follow your performance and review your event results.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 border-0 shadow-sm border-top border-primary border-4">
+                    <div class="card-body">
+                        <div class="fs-1 mb-3">👤</div>
+                        <h5 class="fw-bold">My Profile</h5>
+                        <p class="text-muted">
+                            View your personal RaceDay account information.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    }
+
+    @* ORGANISER DASHBOARD *@
+    else if (isLoggedIn && role == "Organiser")
+    {
+        <div class="p-5 mb-4 rounded-4 shadow"
+             style="background: linear-gradient(120deg, #172033, #343a40); color: white;">
+
+            <span class="badge bg-warning text-dark mb-3">
+                ORGANISER CONTROL PANEL
+            </span>
+
+            <h1 class="display-5 fw-bold">
+                Welcome back, @firstName!
+            </h1>
+
+            <p class="fs-5 mb-0">
+                Manage your RaceDay operations from one place.
+                Organise events, oversee enrolments and record results.
+            </p>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="fw-bold" style="color: #172033;">
+                Event Administration
+            </h2>
+            <span class="badge bg-dark fs-6">Organiser</span>
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 border-0 shadow-sm border-top border-warning border-4">
+                    <div class="card-body">
+                        <div class="fs-1 mb-3">📅</div>
+                        <h5 class="fw-bold">Manage Events</h5>
+                        <p class="text-muted">
+                            Create, update and remove sporting events.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 border-0 shadow-sm border-top border-warning border-4">
+                    <div class="card-body">
+                        <div class="fs-1 mb-3">📂</div>
+                        <h5 class="fw-bold">Manage Categories</h5>
+                        <p class="text-muted">
+                            Organise and maintain event categories.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 border-0 shadow-sm border-top border-warning border-4">
+                    <div class="card-body">
+                        <div class="fs-1 mb-3">👥</div>
+                        <h5 class="fw-bold">Manage Enrolments</h5>
+                        <p class="text-muted">
+                            Review participant entries across your events.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 border-0 shadow-sm border-top border-warning border-4">
+                    <div class="card-body">
+                        <div class="fs-1 mb-3">🏅</div>
+                        <h5 class="fw-bold">Capture Results</h5>
+                        <p class="text-muted">
+                            Record and maintain participant event results.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    }
+
+    @* PUBLIC HOME PAGE *@
+    else
+    {
+        <div class="text-center p-5">
+            <h1 class="display-4 fw-bold text-primary">
+                Welcome to RaceDay
+            </h1>
+
+            <p class="lead">
+                Discover sporting events, challenge yourself
+                and be part of the RaceDay community.
+            </p>
+
+            <a asp-controller="Auth" asp-action="Login"
+               class="btn btn-primary me-2">
+                Login
+            </a>
+
+            <a asp-controller="Auth" asp-action="Register"
+               class="btn btn-outline-primary">
+                Register
+            </a>
+        </div>
+    }
+
+</div>

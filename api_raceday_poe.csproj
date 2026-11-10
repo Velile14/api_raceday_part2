@@ -4,6 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <DefaultItemExcludes>$(DefaultItemExcludes);RaceDay.Web/**;raceday_unit_test/**</DefaultItemExcludes>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,5 +21,10 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
     <PackageReference Include="System.Data.SqlClient" Version="4.9.1" />
   </ItemGroup>
+	
+<ItemGroup>
+  <Compile Remove="RaceDay.Web/**/*.cs" />
+  <Compile Remove="raceday_unit_test/**/*.cs" />
+</ItemGroup>
 
 </Project>

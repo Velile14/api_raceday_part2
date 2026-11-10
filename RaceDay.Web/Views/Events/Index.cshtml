@@ -79,6 +79,16 @@
         </div>
     }
 
+    @if (Context.Session.GetString("Role") == "Participant")
+    {
+        <a asp-controller="Enrolments"
+           asp-action="Create"
+           asp-route-eventId="@item.EventID"
+           class="btn btn-success">
+            Enter Event
+        </a>
+    }
+
     <a asp-controller="Home"
        asp-action="Index"
        class="btn btn-outline-secondary mt-3">

@@ -1,5 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using RaceDay.Web.Services;
 using RaceDay.Web.ViewModels;
 
